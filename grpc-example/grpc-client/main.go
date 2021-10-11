@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 type Authentication struct {
@@ -28,16 +29,24 @@ func main() {
 	// 简单调用
 	// conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
-	auth := Authentication{
-		User:     "admin",
-		Password: "admin",
-	}
+	// auth := Authentication{
+	// 	User:     "admin",
+	// 	Password: "admin",
+	// }
 
 	// Token 认证
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure(), grpc.WithPerRPCCredentials(&auth))
+	// conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure(), grpc.WithPerRPCCredentials(&auth))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// 证书认证-单向认证
+	creds, err := credentials.NewClientTLSFromFile("keys/server.crt", "example.grpcdev.cn")
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
+	conn, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(creds))
 	defer conn.Close()
 
 	client := proto.NewGreeterClient(conn)
