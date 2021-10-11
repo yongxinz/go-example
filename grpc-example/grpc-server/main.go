@@ -8,6 +8,8 @@ import (
 	"log"
 	"net"
 
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -47,7 +49,22 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	server := grpc.NewServer()
+	// 简单调用
+	// server := grpc.NewServer()
+
+	// 增加验证器，分别是标准模式和流模式
+	server := grpc.NewServer(
+		grpc.UnaryInterceptor(
+			grpc_middleware.ChainUnaryServer(
+				grpc_validator.UnaryServerInterceptor(),
+			),
+		),
+		grpc.StreamInterceptor(
+			grpc_middleware.ChainStreamServer(
+				grpc_validator.StreamServerInterceptor(),
+			),
+		),
+	)
 	// 注册 grpcurl 所需的 reflection 服务
 	reflection.Register(server)
 	// 注册业务服务

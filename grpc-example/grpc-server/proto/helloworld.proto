@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package proto;
 
+// 验证器引入
+import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+
 // The greeting service definition.
 service Greeter {
     // Sends a greeting
@@ -11,8 +14,15 @@ service Greeter {
 }
 
 // The request message containing the user's name.
+// message HelloRequest {
+//     string name = 1;
+// }
+
+// 增加验证器
 message HelloRequest {
-    string name = 1;
+    string name = 1 [
+        (validator.field) = {regex: "^[z]{2,5}$"}
+    ];
 }
 
 // The response message containing the greetings
