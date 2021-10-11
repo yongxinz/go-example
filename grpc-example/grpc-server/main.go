@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"grpc-server/proto"
+	"io"
 	"log"
 	"net"
 
@@ -18,6 +19,26 @@ func (*greeter) SayHello(ctx context.Context, req *proto.HelloRequest) (*proto.H
 	fmt.Println(req)
 	reply := &proto.HelloReply{Message: "hello"}
 	return reply, nil
+}
+
+func (*greeter) SayHelloStream(stream proto.Greeter_SayHelloStreamServer) error {
+	for {
+		args, err := stream.Recv()
+		if err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return err
+		}
+
+		fmt.Println("Recv: " + args.Name)
+		reply := &proto.HelloReply{Message: "hi " + args.Name}
+
+		err = stream.Send(reply)
+		if err != nil {
+			return err
+		}
+	}
 }
 
 func main() {

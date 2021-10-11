@@ -6,6 +6,8 @@ package proto;
 service Greeter {
     // Sends a greeting
     rpc SayHello (HelloRequest) returns (HelloReply) {}
+    // Sends stream message
+    rpc SayHelloStream (stream HelloRequest) returns (stream HelloReply) {}
 }
 
 // The request message containing the user's name.
