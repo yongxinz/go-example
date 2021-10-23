@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto;
+ 
+message String {
+    string value = 1;
+}
+ 
+service PubsubService {
+    rpc Publish (String) returns (String);
+    rpc SubscribeTopic (String) returns (stream String);
+    rpc Subscribe (String) returns (stream String);
+}
