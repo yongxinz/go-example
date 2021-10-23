@@ -4,12 +4,12 @@ Go 语言编程的一些代码示例，开箱即用。
 
 ## 基础学习
 
-[代码示例](basic-example/)
+- [代码示例](basic-example/)
 
 ## gRPC
 
 增加 gRPC 相关代码，内容包括简单的 gRPC 服务，流处理模式，验证器，Token 认证和证书认证。
 
-[gRPC，爆赞](https://mp.weixin.qq.com/s/1Xbca4Dv0akonAZerrChgA)
-
-[代码示例](grpc-example/)
+- [使用 grpcurl 通过命令行访问 gRPC 服务](https://mp.weixin.qq.com/s/GShwcGCopXVmxCKnYf5FhA)
+- [gRPC，爆赞](https://mp.weixin.qq.com/s/1Xbca4Dv0akonAZerrChgA)
+- [代码示例](grpc-example/)
