@@ -48,14 +48,14 @@ func main() {
 	}
 
 	// 简单调用
-	server1 := grpc.NewServer()
+	server := grpc.NewServer()
 	// 注册 grpcurl 所需的 reflection 服务
-	reflection.Register(server1)
+	reflection.Register(server)
 	// 注册业务服务
-	proto.RegisterGreeterServer(server1, &greeter{})
+	proto.RegisterGreeterServer(server, &greeter{})
 
 	fmt.Println("grpc server start ...")
-	if err := server1.Serve(lis); err != nil {
+	if err := server.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
