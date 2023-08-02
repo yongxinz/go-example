@@ -10,6 +10,7 @@ Go 语言编程的一些代码示例，开箱即用。
 
 - [代码示例](algorithm/)
 - [Go 语言实现快速排序算法](https://mp.weixin.qq.com/s/OaHrvRGyVEWEC4gyONan1Q)
+- [使用 Go 语言实现二叉搜索树](https://mp.weixin.qq.com/s/2wYRmG_AiiHYjLDEXg94Ag)
 
 ## gRPC
 
